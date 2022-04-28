@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 4000
 const startServer = async ()=>{
     try {
         await apolloServer.start()
-        apolloServer.applyMiddleware({app});
+        apolloServer.applyMiddleware({app, path: "/graphql"});
 
         await sequelize.authenticate()
         await sequelize.sync()

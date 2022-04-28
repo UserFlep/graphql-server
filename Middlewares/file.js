@@ -22,10 +22,10 @@ export const readFile = async (file) => {
     return url;
 } // This is single readfile
 
-export const multipleReadFile = async (file) => {
+export const multipleReadFile = async (files) => {
     let fileUrl = [];
-    for (let i = 0; i < file.length; i++) {
-        const {createReadStream, filename} = await file[i].file;
+    for (let i = 0; i < files.length; i++) {
+        const {createReadStream, filename} = await files[i].file;
         const stream = createReadStream();
         let {ext, name} = parse(filename);
         name = `single${Math.floor((Math.random() * 10000) + 1)}`;
@@ -35,7 +35,7 @@ export const multipleReadFile = async (file) => {
         const baseUrl = process.env.BASE_URL
         const port = process.env.PORT
         url = `${baseUrl}${port}${url.split('Upload')[1]}`;
-        fileUrl.push({url});
+        fileUrl.push(url);
     }
     return fileUrl
 }
