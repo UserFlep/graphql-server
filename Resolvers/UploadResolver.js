@@ -15,10 +15,9 @@ export default {
 
         multipleUpload: async (parent, {file}, {File}) => {
             const imageUrls = await multipleReadFile(file);
-
             await File.bulkCreate(
-                imageUrls.map(url=> ({
-                    name: url
+                imageUrls.map(item=> ({
+                    name: item.url
                 }))
             )
 

@@ -1,9 +1,15 @@
 import {join, parse} from "path";
 import {createWriteStream} from "fs";
 import 'dotenv/config'
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 
 export const readFile = async (file) => {
-    const {createReadStream, filename} = await file;
+    const {createReadStream, filename} = await file.file;
     const stream = createReadStream();
     let {ext, name} = parse(filename);
     name = `single${Math.floor((Math.random() * 10000) + 1)}`;
@@ -19,7 +25,7 @@ export const readFile = async (file) => {
 export const multipleReadFile = async (file) => {
     let fileUrl = [];
     for (let i = 0; i < file.length; i++) {
-        const {createReadStream, filename} = await file[i];
+        const {createReadStream, filename} = await file[i].file;
         const stream = createReadStream();
         let {ext, name} = parse(filename);
         name = `single${Math.floor((Math.random() * 10000) + 1)}`;

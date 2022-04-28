@@ -22,4 +22,4 @@ const typeDefs = gql`
 `;
 
 
-export default [typeDefs, groupTypes, tagTypes, fileTypes, fileTagsTypes]
+export default [typeDefs, groupTypes, tagTypes, fileTypes, fileTagsTypes, uploadTypes]
