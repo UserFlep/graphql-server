@@ -3,7 +3,6 @@ import groupTypes from './GroupTypes.js'
 import tagTypes from "./TagTypes.js"
 import fileTypes from "./FileTypes.js"
 import fileTagsTypes from "./FileTagsTypes.js";
-import uploadTypes from "./UploadTypes.js";
 
 const typeDefs = gql`
     scalar Upload
@@ -22,4 +21,4 @@ const typeDefs = gql`
 `;
 
 
-export default [typeDefs, groupTypes, tagTypes, fileTypes, fileTagsTypes, uploadTypes]
+export default [typeDefs, groupTypes, tagTypes, fileTypes, fileTagsTypes]

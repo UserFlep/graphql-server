@@ -12,7 +12,6 @@ export const readFile = async (file) => {
     const {createReadStream, filename} = await file.file;
     const stream = createReadStream();
     let {ext, name} = parse(filename);
-    console.log(ext, name)
     name = `${Math.floor((Math.random() * 10000) + 1)}`;
     let url = join(__dirname, `../Upload/${name}-${Date.now()}${ext}`);
     const imageStream = await createWriteStream(url)

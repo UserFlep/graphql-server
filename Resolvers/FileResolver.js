@@ -1,3 +1,5 @@
+import {multipleReadFile, readFile} from "../Middlewares/file.js";
+
 export default {
 
     Query: {
@@ -21,15 +23,21 @@ export default {
     },
 
     Mutation: {
-        createFile: async (parent, {input}, {File}) => await File.create({
-                name: input.name
-        }),
+        createFile: async (parent, {file}, {File}) => {
+            const fileUrl = await readFile(file);
+            return await File.create({
+                name: fileUrl
+            })
+        },
 
-        //Update возвращает 2 элемента, 1 - количество затронутых строк, 2 - сами затронутые строки
-        updateFile: async (parent, {id, input}, {File}) => await File.findByPk(id)
-            .then(async file => await file.update({
-                    name: input.name
-            })),
+        createFiles: async (parent, {files}, {File}) => {
+            const fileUrls = await multipleReadFile(files);
+            return await File.bulkCreate(
+                fileUrls.map(url=> ({
+                    name: url
+                }))
+            )
+        },
 
         //Destroy возвращает число удаленных строк
         deleteFile: async (parent, {id}, {File}) => await File.destroy({
