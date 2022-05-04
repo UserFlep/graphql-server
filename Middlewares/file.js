@@ -24,9 +24,9 @@ export const readFile = async (file) => {
 } // This is single readfile
 
 export const multipleReadFile = async (files) => {
-    let fileUrl = [];
+    let fileUrls = [];
     for (let i = 0; i < files.length; i++) {
-        fileUrl.push(await readFile(files[i]))
+        fileUrls.push(await readFile(files[i]))
     }
-    return fileUrl
+    return fileUrls
 }

@@ -4,9 +4,9 @@ export default {
 
     Mutation: {
         singleUpload: async (parent, {file}, {File}) => {
-            const imageUrl = await readFile(file);
+            const fileUrl = await readFile(file);
             await File.create({
-                name: imageUrl
+                name: fileUrl
             })
             return {
                 message: "Single file uploaded successfully!"
@@ -14,9 +14,9 @@ export default {
         },
 
         multipleUpload: async (parent, {file}, {File}) => {
-            const imageUrls = await multipleReadFile(file);
+            const fileUrls = await multipleReadFile(file);
             await File.bulkCreate(
-                imageUrls.map(url=> ({
+                fileUrls.map(url=> ({
                     name: url
                 }))
             )
