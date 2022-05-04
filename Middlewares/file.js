@@ -27,6 +27,7 @@ export const multipleReadFile = async (files) => {
     let fileUrl = [];
     for (let i = 0; i < files.length; i++) {
         fileUrl.push(await readFile(files[i]))
+
         // const {createReadStream, filename} = await files[i].file;
         // const stream = createReadStream();
         // let {ext, name} = parse(filename);
