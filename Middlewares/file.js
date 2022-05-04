@@ -9,7 +9,7 @@ const __dirname = dirname(__filename);
 
 
 export const readFile = async (file) => {
-    const {createReadStream, filename} = await file.file;
+    const {createReadStream, filename} = await file.promise;
     const stream = createReadStream();
     let {ext, name} = parse(filename);
     name = `${Math.floor((Math.random() * 10000) + 1)}`;
