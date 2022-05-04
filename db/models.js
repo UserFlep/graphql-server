@@ -3,7 +3,8 @@ import sequelize from "./db.js";
 
 const File = sequelize.define('files', {
     id: {type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true},
-    name: {type: DataTypes.STRING, unique: true, allowNull: false}
+    url: {type: DataTypes.STRING, unique: true, allowNull: false},
+    mimetype: {type: DataTypes.STRING, unique: false, allowNull: false}
 });
 
 const Tag = sequelize.define('tags', {
