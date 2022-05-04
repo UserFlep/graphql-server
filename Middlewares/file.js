@@ -1,19 +1,16 @@
 import {join, parse} from "path";
 import {createWriteStream} from "fs";
 import 'dotenv/config'
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import { resolve  } from 'path';
 
 
 export const readFile = async (file) => {
-    const {createReadStream, filename} = await file.promise;
+    console.log(await file.promise)
+    const {createReadStream, filename, mimetype} = await file.promise;
     const stream = createReadStream();
     let {ext, name} = parse(filename);
     name = `${Math.floor((Math.random() * 10000) + 1)}`;
-    let url = join(__dirname, `../Upload/${name}-${Date.now()}${ext}`);
+    let url = join(resolve("Upload"), `${name}-${Date.now()}${ext}`);
     const imageStream = await createWriteStream(url)
     await stream.pipe(imageStream);
     const baseUrl = process.env.BASE_URL
