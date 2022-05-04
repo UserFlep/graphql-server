@@ -3,12 +3,14 @@ import {gql} from "apollo-server-express"
 export default gql`
     type File {
         id: ID
-        name: String
+        url: String
+        mimetype: String
     }
 
     type FullFile {
         id: ID
-        name: String
+        url: String
+        mimetype: String
         tags: [FullTag]
     }
     

@@ -24,17 +24,19 @@ export default {
 
     Mutation: {
         createFile: async (parent, {file}, {File}) => {
-            const fileUrl = await readFile(file);
+            const fileData = await readFile(file);
             return await File.create({
-                name: fileUrl
+                url: fileData.url,
+                mimetype: fileData.mimetype
             })
         },
 
         createFiles: async (parent, {files}, {File}) => {
-            const fileUrls = await multipleReadFile(files);
+            const filesData = await multipleReadFile(files);
             return await File.bulkCreate(
-                fileUrls.map(url=> ({
-                    name: url
+                filesData.map(fileData => ({
+                    url: fileData.url,
+                    mimetype: fileData.mimetype
                 }))
             )
         },
