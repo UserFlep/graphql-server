@@ -8,15 +8,16 @@ import typeDefs from "./TypeDefs/index.js";
 import resolvers from "./Resolvers/index.js";
 import models from "./db/models.js";
 
+import {schema} from "./Schema/ComposerTypes/index.js";
+
 const PORT = process.env.PORT || 4000
 
-const startApolloServer = async (typeDefs, resolvers)=>{
+const startApolloServer = async (schema)=>{
 
     const httpServer = http.createServer(app);
 
     const apolloServer = new ApolloServer({
-        typeDefs,
-        resolvers,
+        schema,
         context: async ()=>models,
         plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
     });
@@ -36,6 +37,6 @@ const startApolloServer = async (typeDefs, resolvers)=>{
 
 }
 
-await startApolloServer(typeDefs, resolvers)
+await startApolloServer(schema)
 
 
