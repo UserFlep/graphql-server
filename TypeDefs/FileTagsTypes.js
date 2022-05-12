@@ -23,7 +23,7 @@ export default gql`
     }
 
     extend type Mutation {
-        fileTagsCreate(input: [FileTagInput!]!): [[FileTagPayload!]!]!
+        fileTagsCreate(input: FileTagInput!): [FileTagPayload!]
         fileTagsDelete(fileId: [ID!]): Int!
     }
 `;
