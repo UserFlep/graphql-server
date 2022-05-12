@@ -2,26 +2,25 @@ import {gql} from "apollo-server-express"
 
 export default gql`
     type File {
-        id: ID
-        url: String
-        mimetype: String
+        id: ID!
+        url: String!
+        mimetype: String!
+        tags: [Tag]
     }
-
-    type FullFile {
-        id: ID
-        url: String
-        mimetype: String
-        tags: [FullTag]
+    
+    type FilePayload {
+        recordId: ID!
+        record: File!
+        query: Query
     }
     
     extend type Query {
-        getFiles: [FullFile]
-        getFile(id: ID): FullFile
+        files: [File!]!
+        file(id: ID!): File!
     }
 
     extend type Mutation {
-        createFile(file: Upload!): File
-        createFiles(files: [Upload]!): [File]
-        deleteFile(id: ID): Boolean
+        fileCreate(files: [Upload!]!): [FilePayload!]!
+        fileDelete(id: [ID!]!): Int!
     }
 `;

@@ -4,27 +4,35 @@ export default gql`
     type Tag {
         id: ID!
         name: String!
-    }
-
-    type FullTag {
-        id: ID!
-        name: String!
-        group: Group!
+        group: Group
     }
     
-    input TagInput {
+    type TagPayload {
+        recordId: ID!
+        record: Tag!
+        query: Query
+    }
+    
+    input CreateTagInput {
         name: String!
         groupId: ID!
     }
 
+    input UpdateTagInput {
+        id: ID!
+        name: String
+        groupId: ID
+    }
+
     extend type Query {
-        getTags: [FullTag!]!
-        getTag(id: ID!): FullTag!
+        tag(id: ID!): Tag!
+        tags: [Tag!]!
     }
 
     extend type Mutation {
-        createTag(input: TagInput!): Tag
-        updateTag(id: ID!, input: TagInput!): Tag
-        deleteTag(id: ID!): Boolean
+        tagCreate(input: [CreateTagInput!]!): [TagPayload!]!
+        tagUpdate(input: [UpdateTagInput!]!): [TagPayload!]!
+        tagDelete(id: [ID!]): Int!
     }
+
 `;

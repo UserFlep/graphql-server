@@ -15,7 +15,6 @@ export const readFile = async (file) => {
     const baseUrl = process.env.BASE_URL
     const port = process.env.PORT
     url = `${baseUrl}${port}/${name}`;
-
     return {url, mimetype};
 } // This is single readfile
 

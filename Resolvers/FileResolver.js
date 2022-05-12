@@ -1,9 +1,8 @@
-import {multipleReadFile, readFile} from "../Middlewares/file.js";
+import {multipleReadFile} from "../Middlewares/file.js";
 
 export default {
-
     Query: {
-        getFiles: async (parent, args, {File, Tag, Group}) => await File.findAll({
+        files: async (parent, args, {File, Tag, Group}) => await File.findAll({
             include: {
                 model: Tag,
                 include: {
@@ -12,7 +11,7 @@ export default {
             }
         }),
 
-        getFile: async (parent, {id}, {File, Tag, Group}) => await File.findByPk(id, {
+        file: async (parent, {id}, {File, Tag, Group}) => await File.findByPk(id, {
             include: {
                 model: Tag,
                 include: {
@@ -23,29 +22,22 @@ export default {
     },
 
     Mutation: {
-        createFile: async (parent, {file}, {File}) => {
-            const fileData = await readFile(file);
-            return await File.create({
-                url: fileData.url,
-                mimetype: fileData.mimetype
-            })
-        },
-
-        createFiles: async (parent, {files}, {File}) => {
+        fileCreate: async (parent, {files}, {File}) => {
             const filesData = await multipleReadFile(files);
-            return await File.bulkCreate(
+            const crtFiles = await File.bulkCreate(
                 filesData.map(fileData => ({
                     url: fileData.url,
                     mimetype: fileData.mimetype
                 }))
             )
+            return crtFiles.map(crtFile=>({
+                recordId: crtFile.id,
+                record: crtFile,
+                query: {}
+            }))
         },
 
         //Destroy возвращает число удаленных строк
-        deleteFile: async (parent, {id}, {File}) => await File.destroy({
-            where: {
-                id: id
-            }
-        }),
+        fileDelete: async (parent, {id}, {File}) => await File.destroy({where: {id}}),
     },
 };
