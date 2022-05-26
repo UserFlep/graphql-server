@@ -17,6 +17,7 @@ const startApolloServer = async (typeDefs, resolvers)=>{
     const apolloServer = new ApolloServer({
         typeDefs,
         resolvers,
+        csrfPrevention: true,
         context: async ()=>models,
         plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
     });

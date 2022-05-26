@@ -1,6 +1,9 @@
 import {multipleReadFile} from "../Middlewares/file.js";
+import {GraphQLUpload} from "graphql-upload";
 
 export default {
+    Upload: GraphQLUpload,
+
     Query: {
         files: async (parent, args, {File, Tag, Group}) => await File.findAll({
             include: {
