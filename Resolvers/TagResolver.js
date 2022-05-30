@@ -1,16 +1,12 @@
 export default {
 
     Query: {
-        tag: async (parent, {id}, {Tag, Group}) => await Tag.findByPk(id, {
-            include: {
-                model: Group
-            }
-        }),
-        tags: async (parent, args, {Tag, Group}) => Tag.findAll({
-            include: {
-                model: Group
-            }
-        }),
+        // tag: async (parent, {id}, {Tag}) => await Tag.findByPk(id),
+        tags: async (parent, args, {Tag}) => await Tag.findAll(),
+    },
+
+    Tag: {
+        group: async (parent,args,{Group})=> await Group.findOne({where: {id: parent.groupId}})
     },
 
     Mutation: {
