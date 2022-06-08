@@ -12,10 +12,10 @@ const Tag = sequelize.define('tags', {
     name: {type: DataTypes.STRING, unique: true, allowNull: false}
 });
 
-const Group = sequelize.define('groups', {
-    id: {type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true},
-    name: {type: DataTypes.STRING, unique: true, allowNull: false}
-});
+// const Group = sequelize.define('groups', {
+//     id: {type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true},
+//     name: {type: DataTypes.STRING, unique: true, allowNull: false}
+// });
 
 const FileTag = sequelize.define('file_tags', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}
@@ -24,12 +24,14 @@ const FileTag = sequelize.define('file_tags', {
 File.belongsToMany(Tag, { through: FileTag})
 Tag.belongsToMany(File, { through: FileTag})
 
-Group.hasMany(Tag)
-Tag.belongsTo(Group)
+// Group.hasMany(Tag)
+// Tag.belongsTo(Group)
+Tag.hasOne(Tag, {foreignKey: {name: 'parentId', allowNull: true}})
+Tag.belongsTo(Tag, {foreignKey: {name: 'parentId', allowNull: true}})
 
 export default {
     File,
     Tag,
-    Group,
+    // Group,
     FileTag
 }

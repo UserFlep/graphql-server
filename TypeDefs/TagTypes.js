@@ -4,7 +4,7 @@ export default gql`
     type Tag {
         id: ID!
         name: String!
-        group: Group
+        parent: Tag
     }
     
     type TagPayload {
@@ -15,13 +15,13 @@ export default gql`
     
     input CreateTagInput {
         name: String!
-        groupId: ID!
+        parentId: ID
     }
 
     input UpdateTagInput {
         id: ID!
         name: String
-        groupId: ID
+        parentId: ID
     }
 
     extend type Query {
