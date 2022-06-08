@@ -5,7 +5,9 @@ import { resolve  } from 'path';
 
 
 export const readFile = async (file) => {
-    const {createReadStream, filename, mimetype} = await file.promise;
+    console.log("file", file)
+    const {createReadStream, filename, mimetype} = await file; //file.promise
+    console.log("createReadStream", createReadStream)
     const stream = createReadStream();
     const {ext} = parse(filename);
     const name = `${Math.floor((Math.random() * 10000) + 1)}-${Date.now()}${ext}`;

@@ -11,12 +11,12 @@ export default {
 
     Mutation: {
         tagCreate: async (parent, {input}, {Tag}) => {
-            const crtTags = await Tag.bulkCreate(
+            const createdTags = await Tag.bulkCreate(
                 input.map(el => ({ name: el.name, groupId: el.groupId }))
             )
-            return crtTags.map(crtTag=>({
-                recordId: crtTag.id,
-                record: crtTag,
+            return createdTags.map(createdTag=>({
+                recordId: createdTag.id,
+                record: createdTag,
                 query: {}
             }))
         },
@@ -25,8 +25,8 @@ export default {
         tagUpdate: async (parent, {input}, {Tag, Group}) => {
             const result = []
             for(const el of input){
-                const [,updTag] = await Tag.update({name: el.name, groupId: el.groupId}, {where: {id: el.id}, include: {model: Group}, returning: true, plain: true})
-                result.push(updTag)
+                const [,updatedTag] = await Tag.update({name: el.name, groupId: el.groupId}, {where: {id: el.id}, include: {model: Group}, returning: true, plain: true})
+                result.push(updatedTag)
             }
 
             return result.map(updTag=>({
