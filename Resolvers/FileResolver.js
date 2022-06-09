@@ -1,3 +1,4 @@
+import exifr from 'exifr'
 import {multipleReadFile} from "../Middlewares/file.js";
 import {GraphQLUpload} from "graphql-upload";
 
@@ -5,23 +6,8 @@ export default {
     Upload: GraphQLUpload,
 
     Query: {
-        files: async (parent, args, {File, Tag, Group}) => await File.findAll({
-            include: {
-                model: Tag,
-                include: {
-                    model: Group
-                }
-            }
-        }),
-
-        file: async (parent, {id}, {File, Tag, Group}) => await File.findByPk(id, {
-            include: {
-                model: Tag,
-                include: {
-                    model: Group
-                }
-            }
-        }),
+        files: async (parent, args, {File, Tag}) => await File.findAll({include: Tag}),
+        file: async (parent, {id}, {File, Tag}) => await File.findByPk(id, {include: Tag}),
     },
 
     Mutation: {

@@ -25,7 +25,7 @@ export default {
         tagUpdate: async (parent, {input}, {Tag}) => {
             const result = []
             for(const el of input){
-                const [,updatedTag] = await Tag.update({name: el.name, parentId: el.parentId}, {where: {id: el.id}, include: Tag, returning: true, plain: true})
+                const [,updatedTag] = await Tag.update({name: el.name, parentId: el.parentId}, {where: {id: el.id}, returning: true, plain: true})
                 result.push(updatedTag)
             }
 

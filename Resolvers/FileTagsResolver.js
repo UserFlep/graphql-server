@@ -1,24 +1,11 @@
 export default {
 
     Query: {
-        fileTags: async (parent, {fileId}, {FileTag, Tag}) => await FileTag.findAll(
-            {
-                where: {
-                    fileId
-                }
-            },
-            {
-                include: {
-                    model: Tag
-                }
-            }
-        ),
+        fileTags: async (parent, {fileId}, {FileTag}) => await FileTag.findAll({where: {fileId}}),
     },
 
     Mutation: {
-
         fileTagsCreate: async (parent, {input}, {FileTag}) => {
-
             const crtFileTags = await FileTag.bulkCreate(
                 input.tagId.map(tagId=> ({
                     fileId: input.fileId,
