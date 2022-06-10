@@ -21,8 +21,16 @@ Tag.belongsToMany(File, { through: FileTag})
 
 Tag.belongsTo(Tag, {foreignKey: "parentId"})
 
-export default {
+const models = {
     File,
     Tag,
     FileTag
 }
+
+Object.keys(models).forEach(key => {
+    if ('associate' in models[key]) {
+        models[key].associate(models);
+    }
+});
+
+export default models
