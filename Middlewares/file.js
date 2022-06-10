@@ -4,12 +4,15 @@ import {createWriteStream} from "fs";
 import {finished} from "stream/promises"
 import  { resolve  } from 'path';
 import { exiftool} from 'exiftool-vendored'; //работает идеально
+import mimeType from "whatwg-mimetype"
 
 export const singleReadFile = async (file) => {
     try {
         const {createReadStream, filename, mimetype} = await file; //file.promise
-        const stream = await createReadStream();
 
+        const destructedMimetype = mimeType.parse(mimetype)
+
+        const stream = await createReadStream();
         const {ext} = parse(filename);
         const name = `${Math.floor((Math.random() * 10000) + 1)}-${Date.now()}${ext}`;
         let url = join(resolve("Upload"), name);
@@ -22,11 +25,17 @@ export const singleReadFile = async (file) => {
         //Работает идеально
         const metadata = await exiftool.read(url);
         const {ImageSize, FileSize} = metadata;
-        console.log(metadata);
+        //console.log(metadata);
 
         url = `${baseUrl}${port}/${name}`;
 
-        return {url, mimetype, ImageSize, FileSize};
+        return {
+            url,
+            type: destructedMimetype.type.toUpperCase(),
+            subtype: destructedMimetype.subtype.toUpperCase(),
+            imageSize: ImageSize,
+            fileSize: FileSize
+        };
     }
     catch (e){
         console.log("Error on Middlewares/file.js", e.message)
