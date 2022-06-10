@@ -4,7 +4,11 @@ import sequelize from "./db.js";
 const File = sequelize.define('files', {
     id: {type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true},
     url: {type: DataTypes.STRING, unique: true, allowNull: false},
-    mimetype: {type: DataTypes.STRING, unique: false, allowNull: false}
+    mimetype: {type: DataTypes.STRING, unique: false, allowNull: false},
+    type: {type: DataTypes.STRING, unique: false, allowNull: false},
+    subtype: {type: DataTypes.STRING, unique: false, allowNull: false},
+    fileSize: {type: DataTypes.STRING, unique: false, allowNull: false},
+    imageSize: {type: DataTypes.STRING, unique: false},
 });
 
 const Tag = sequelize.define('tags', {

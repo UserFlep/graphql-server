@@ -9,9 +9,7 @@ import mimeType from "whatwg-mimetype"
 export const singleReadFile = async (file) => {
     try {
         const {createReadStream, filename, mimetype} = await file; //file.promise
-
         const destructedMimetype = mimeType.parse(mimetype)
-
         const stream = await createReadStream();
         const {ext} = parse(filename);
         const name = `${Math.floor((Math.random() * 10000) + 1)}-${Date.now()}${ext}`;
@@ -25,12 +23,11 @@ export const singleReadFile = async (file) => {
         //Работает идеально
         const metadata = await exiftool.read(url);
         const {ImageSize, FileSize} = metadata;
-        //console.log(metadata);
 
         url = `${baseUrl}${port}/${name}`;
-
         return {
             url,
+            mimetype,
             type: destructedMimetype.type.toUpperCase(),
             subtype: destructedMimetype.subtype.toUpperCase(),
             imageSize: ImageSize,
@@ -41,7 +38,7 @@ export const singleReadFile = async (file) => {
         console.log("Error on Middlewares/file.js", e.message)
     }
     finally {
-        await exiftool.end()
+        //await exiftool.end() //из-за этого вылетают ошибки
     }
 } // This is single readfile
 

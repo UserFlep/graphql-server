@@ -12,15 +12,19 @@ export default {
     Mutation: {
         fileCreate: async (parent, {files}, {File}) => {
             const filesData = await multipleReadFile(files);
-            const crtFiles = await File.bulkCreate(
+            const createdFiles = await File.bulkCreate(
                 filesData.map(fileData => ({
                     url: fileData.url,
-                    mimetype: fileData.mimetype
+                    mimetype: fileData.mimetype,
+                    type: fileData.type,
+                    subtype: fileData.subtype,
+                    imageSize: fileData.imageSize,
+                    fileSize: fileData.fileSize
                 }))
             )
-            return crtFiles.map(crtFile=>({
-                recordId: crtFile.id,
-                record: crtFile,
+            return createdFiles.map(createdFile=>({
+                recordId: createdFile.id,
+                record: createdFile,
                 query: {}
             }))
         },
