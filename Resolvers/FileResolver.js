@@ -1,4 +1,3 @@
-import exifr from 'exifr'
 import {multipleReadFile} from "../Middlewares/file.js";
 import {GraphQLUpload} from "graphql-upload";
 
