@@ -1,6 +1,9 @@
 import {DataTypes} from "sequelize";
 import sequelize from "./db.js";
 
+const  parentIdField = "parentId"
+const nameField = "name"
+
 const File = sequelize.define('files', {
     id: {type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true},
     url: {type: DataTypes.STRING, unique: true, allowNull: false},
@@ -13,7 +16,16 @@ const File = sequelize.define('files', {
 
 const Tag = sequelize.define('tags', {
     id: {type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true},
-    name: {type: DataTypes.STRING, unique: true, allowNull: false}
+    name: {type: DataTypes.STRING, allowNull: false},
+},
+{
+    indexes: [
+        {
+            unique: true,
+            fields: [nameField, parentIdField]
+            //Теперь столбцы в поле fields должны иметь только уникальные сочетание
+        }
+    ]
 });
 
 const FileTag = sequelize.define('file_tags', {
@@ -23,7 +35,8 @@ const FileTag = sequelize.define('file_tags', {
 File.belongsToMany(Tag, { through: FileTag})
 Tag.belongsToMany(File, { through: FileTag})
 
-Tag.belongsTo(Tag, {foreignKey: "parentId"})
+Tag.hasOne(Tag, {foreignKey: parentIdField});
+Tag.belongsTo(Tag, {foreignKey: parentIdField})
 
 const models = {
     File,
