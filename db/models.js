@@ -23,7 +23,7 @@ const Tag = sequelize.define('tags', {
         {
             unique: true,
             fields: [nameField, parentIdField]
-            //Теперь столбцы в поле fields должны иметь только уникальные сочетание
+            //Теперь столбцы в поле fields должны иметь только уникальные сочетания
         }
     ]
 });

@@ -24,4 +24,5 @@ export default [
     typeDefs,
     tagTypes,
     fileTypes,
-    fileTagsTypes]
+    fileTagsTypes
+]

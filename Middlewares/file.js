@@ -1,6 +1,6 @@
 import 'dotenv/config'
 import {join, parse} from "path";
-import {createWriteStream} from "fs";
+import fs from "fs";
 import {finished} from "stream/promises"
 import  { resolve  } from 'path';
 import { exiftool} from 'exiftool-vendored'; //работает идеально
@@ -14,7 +14,7 @@ export const singleReadFile = async (file) => {
         const {ext} = parse(filename);
         const name = `${Math.floor((Math.random() * 10000) + 1)}-${Date.now()}${ext}`;
         let url = join(resolve("Upload"), name);
-        const imageStream = await createWriteStream(url)
+        const imageStream = await fs.createWriteStream(url)
         await stream.pipe(imageStream)
         await finished(imageStream);
         const baseUrl = process.env.BASE_URL
@@ -49,28 +49,3 @@ export const multipleReadFile = async (files) => {
     }
     return filesData
 }
-
-
-//import probe from 'probe-image-size'
-
-
-// export const getFileInfo = async (createReadStream) =>{
-//
-//     const {width, height} = await probe(createReadStream()).catch(e=>console.log("Error",e));
-//
-//     return new Promise((resolves, rejects) => {
-//         let filesize = 0;
-//         let stream = createReadStream();
-//         stream.on('data', (chunk) => {
-//             filesize += chunk.length;
-//         });
-//
-//         stream.on('end', () =>{
-//             resolves({filesize, width, height})}
-//         );
-//         stream.on('error', rejects);
-//     });
-// }
-
-//Получение данных о картинке
-//const {filesize, width, height} = await getFileInfo(createReadStream).catch(e=>console.log(e))
