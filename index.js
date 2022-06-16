@@ -1,5 +1,4 @@
 import 'dotenv/config'
-import sequelize from "./db/db.js";
 import app from "./app.js"
 import http from 'http';
 import {ApolloServer} from "apollo-server-express";
@@ -11,6 +10,9 @@ import models from "./db/models.js";
 const PORT = process.env.PORT || 4000
 
 const startApolloServer = async (typeDefs, resolvers)=>{
+
+
+
 
     const httpServer = http.createServer(app);
 
@@ -30,8 +32,8 @@ const startApolloServer = async (typeDefs, resolvers)=>{
     await new Promise(resolve => httpServer.listen(PORT, resolve))
         .then(async () => {
             // Подключаемся к нашей БД
-            await sequelize.authenticate()
-            await sequelize.sync()
+            await models.sequelize.authenticate()
+            await models.sequelize.sync()
             console.log(`🚀 Server ready at http://localhost:${PORT}${apolloServer.graphqlPath}`);
         })
 

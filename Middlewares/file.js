@@ -6,6 +6,9 @@ import  { resolve  } from 'path';
 import { exiftool} from 'exiftool-vendored'; //работает идеально
 import mimeType from "whatwg-mimetype"
 
+//вариант по-лучше https://observablehq.com/@radames/hello-mediainfo-js-mediainfolib-on-browser
+// демо https://mediainfo.js.org/
+
 export const singleReadFile = async (file) => {
     try {
         const {createReadStream, filename, mimetype} = await file; //file.promise

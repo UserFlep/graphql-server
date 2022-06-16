@@ -44,10 +44,11 @@ const models = {
     FileTag
 }
 
-Object.keys(models).forEach(key => {
-    if ('associate' in models[key]) {
-        models[key].associate(models);
+Object.keys(models).forEach((modelName) => {
+    if ('associate' in models[modelName]) {
+        models[modelName].associate(models);
     }
 });
 
+models.sequelize = sequelize;
 export default models
