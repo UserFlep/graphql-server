@@ -1,6 +1,5 @@
 import {DataTypes} from "sequelize";
 import sequelize from "./db.js";
-
 const  parentIdField = "parentId"
 const nameField = "name"
 
@@ -34,6 +33,7 @@ const FileTag = sequelize.define('file_tags', {
 
 File.belongsToMany(Tag, { through: FileTag})
 Tag.belongsToMany(File, { through: FileTag})
+
 
 Tag.hasOne(Tag, {foreignKey: parentIdField});
 Tag.belongsTo(Tag, {foreignKey: parentIdField})

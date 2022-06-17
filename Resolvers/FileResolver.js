@@ -9,6 +9,10 @@ export default {
         file: async (parent, {id}, {File, Tag}) => await File.findByPk(id, {include: Tag}),
     },
 
+    // File: {
+    //     tags: async (parent, args, {FileTags, Tag}) =>await FileTags.findAll({where: {fileId: parent.id}, include: Tag})
+    // },
+
     Mutation: {
         fileCreate: async (parent, {files}, {File}) => {
             const filesData = await multipleReadFile(files);

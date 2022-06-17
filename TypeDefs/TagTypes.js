@@ -4,6 +4,7 @@ export default gql`
     type Tag {
         id: ID!
         name: String!
+        parentId: ID
         parent: Tag
     }
     
