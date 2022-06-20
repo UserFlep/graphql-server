@@ -33,7 +33,7 @@ export default gql`
     extend type Mutation {
         tagCreate(input: [CreateTagInput!]!): [TagPayload!]!
         tagUpdate(input: [UpdateTagInput!]!): [TagPayload!]!
-        tagDelete(id: [ID!]): Int!
+        tagDelete(id: [ID!]!): Int!
     }
 
 `;
