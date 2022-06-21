@@ -11,6 +11,7 @@ import mimeType from "whatwg-mimetype"
 
 export const singleReadFile = async (file) => {
     try {
+
         const {createReadStream, filename, mimetype} = await file; //file.promise
         const destructedMimetype = mimeType.parse(mimetype)
         const stream = await createReadStream();

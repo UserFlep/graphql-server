@@ -5,13 +5,14 @@ export default {
     Upload: GraphQLUpload,
 
     Query: {
-        files: async (parent, args, {File, Tag}) => await File.findAll({include: Tag}),
-        file: async (parent, {id}, {File, Tag}) => await File.findByPk(id, {include: Tag}),
+        files: async (parent, args, {File, Tag}) => await File.findAll(),
+        file: async (parent, {id}, {File, Tag}) => await File.findByPk(id),
     },
 
-    // File: {
-    //     tags: async (parent, args, {FileTags, Tag}) =>await FileTags.findAll({where: {fileId: parent.id}, include: Tag})
-    // },
+    //метод getTags() формируется sequelzie при установке ассоциации File и Tag
+    File: {
+        tags: async parent => parent.getTags()
+    },
 
     Mutation: {
         fileCreate: async (parent, {files}, {File}) => {
