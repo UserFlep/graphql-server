@@ -31,7 +31,7 @@ export default {
                 }))
             )
 
-            // //Получаем список опций для команды bulkCreate для добавления файловых тегов
+            //Получаем список опций для команды bulkCreate для добавления файловых тегов
             const addingFileTags = []
             for(const createdFile of createdFiles){
                 for(const tagId of input.tagIds){
