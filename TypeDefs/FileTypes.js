@@ -23,13 +23,13 @@ export default gql`
     }
     
     extend type Query {
-        files: [File!]!
         file(id: ID!): File!
+        files: [File!]!
     }
 
     extend type Mutation {
-        fileCreate(input: CreateFileInput!): [FilePayload!]!
-        fileDelete(id: [ID!]!): Int!
+        addFiles(input: CreateFileInput!): [FilePayload!]!
+        removeFiles(id: [ID!]!): Int!
     }
 
 `;
