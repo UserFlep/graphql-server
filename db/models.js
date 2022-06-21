@@ -34,8 +34,7 @@ const FileTag = sequelize.define('file_tags', {
 File.belongsToMany(Tag, { through: FileTag})
 Tag.belongsToMany(File, { through: FileTag})
 
-
-Tag.hasOne(Tag, {foreignKey: parentIdField});
+//если бы связь была как childId то использовалось бы hasOne
 Tag.belongsTo(Tag, {foreignKey: parentIdField})
 
 const models = {

@@ -7,11 +7,11 @@ export default {
 
     //метод Tag.getTag() формируется sequelzie при установке ассоциации Tag и Tag и возвращает parent tag
     Tag: {
-        parent: async (parent)=> await parent.getTag()
+        parent: async parent => await parent.getTag()
     },
 
     Mutation: {
-        tagCreate: async (parent, {input}, {Tag}) => {
+        addTag: async (parent, {input}, {Tag}) => {
             const createdTags = await Tag.bulkCreate(
                 input.map(el => ({ name: el.name, parentId: el.parentId }))
             )
@@ -23,7 +23,7 @@ export default {
         },
 
         //Update возвращает 2 элемента, 1 - количество затронутых строк, 2 - сами затронутые строки
-        tagUpdate: async (parent, {input}, {Tag}) => {
+        updateTag: async (parent, {input}, {Tag}) => {
             const result = []
             for(const el of input){
                 const [,updatedTag] = await Tag.update({name: el.name, parentId: el.parentId}, {where: {id: el.id}, returning: true, plain: true})
@@ -38,6 +38,6 @@ export default {
         },
 
         //Destroy возвращает число удаленных строк
-        tagDelete: async (parent, {id}, {Tag}) => await Tag.destroy({where: {id}}),
+        removeTag: async (parent, {id}, {Tag}) => await Tag.destroy({where: {id}}),
     },
 };
