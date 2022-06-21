@@ -16,6 +16,10 @@ export default gql`
         recordId: ID!
         record: File!
         query: Query
+    } 
+    input CreateFileInput {
+        files: [Upload!]!
+        tagIds: [String!]!
     }
     
     extend type Query {
@@ -24,7 +28,8 @@ export default gql`
     }
 
     extend type Mutation {
-        fileCreate(files: [Upload!]!): [FilePayload!]!
+        fileCreate(input: CreateFileInput!): [FilePayload!]!
         fileDelete(id: [ID!]!): Int!
     }
+
 `;

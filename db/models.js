@@ -44,11 +44,16 @@ const models = {
     FileTag
 }
 
-Object.keys(models).forEach((modelName) => {
-    if ('associate' in models[modelName]) {
-        models[modelName].associate(models);
-    }
-});
+//Хз зачем этот код, видимых изменений и ошибок от него нет, но в различных примерах по sequelize он есть.
+//Нашел информацию, что это устаревший код, который необходим для связывания(установки ассоциация) моделей, определенных в разных файлах
+//У меня модели определены в одном файле, но пока на всякий случай оставлю это здесь
+// В случае ошибок с ассоциациями раскомментировать и посмотреть на результат
+//
+// Object.keys(models).forEach((modelName) => {
+//     if ('associate' in models[modelName]) {
+//         models[modelName].associate(models);
+//     }
+// });
 
 models.sequelize = sequelize;
 export default models

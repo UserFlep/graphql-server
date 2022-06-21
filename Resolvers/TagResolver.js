@@ -5,6 +5,7 @@ export default {
         tags: async (parent, args, {Tag}) => await Tag.findAll(),
     },
 
+    //метод Tag.getTag() формируется sequelzie при установке ассоциации Tag и Tag и возвращает parent tag
     Tag: {
         parent: async (parent)=> await parent.getTag()
     },
