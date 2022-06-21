@@ -31,5 +31,4 @@ export default gql`
         addFiles(input: CreateFileInput!): [FilePayload!]!
         removeFiles(id: [ID!]!): Int!
     }
-
 `;
