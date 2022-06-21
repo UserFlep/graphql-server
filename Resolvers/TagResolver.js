@@ -6,7 +6,7 @@ export default {
     },
 
     Tag: {
-        parent: async (parent, args, {Tag})=> await Tag.findOne({where: {id: parent.parentId}})
+        parent: async (parent)=> await parent.getTag()
     },
 
     Mutation: {
