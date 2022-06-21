@@ -1,7 +1,6 @@
 import {gql} from "apollo-server-express"
 import tagTypes from "./TagTypes.js"
 import fileTypes from "./FileTypes.js"
-import fileTagsTypes from "./FileTagsTypes.js";
 
 const typeDefs = gql`
     scalar Upload
@@ -24,5 +23,4 @@ export default [
     typeDefs,
     tagTypes,
     fileTypes,
-    fileTagsTypes
 ]
