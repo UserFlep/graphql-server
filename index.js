@@ -11,15 +11,16 @@ const PORT = process.env.PORT || 4000
 
 const startApolloServer = async (typeDefs, resolvers)=>{
 
-
-
-
     const httpServer = http.createServer(app);
 
     const apolloServer = new ApolloServer({
         typeDefs,
         resolvers,
         csrfPrevention: true,
+        cache: 'bounded',
+        // cors: {
+        //     origin: ["http://localhost:3000"]
+        // },
         context: async ()=>models,
         plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
     });
