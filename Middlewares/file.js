@@ -8,6 +8,7 @@ import mimeType from "whatwg-mimetype"
 
 //вариант по-лучше https://observablehq.com/@radames/hello-mediainfo-js-mediainfolib-on-browser
 // демо https://mediainfo.js.org/
+//Возможно лучше получать метаинформацию на стороне клиента
 
 export const singleReadFile = async (file) => {
     try {
