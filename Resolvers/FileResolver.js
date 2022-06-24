@@ -23,11 +23,7 @@ export default {
             const createdFiles = await File.bulkCreate(
                 filesData.map(fileData => ({
                     url: fileData.url,
-                    mimetype: fileData.mimetype,
-                    type: fileData.type,
-                    subtype: fileData.subtype,
-                    imageSize: fileData.imageSize,
-                    fileSize: fileData.fileSize
+                    mimetype: fileData.mimetype
                 }))
             )
 

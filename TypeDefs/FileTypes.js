@@ -5,10 +5,6 @@ export default gql`
         id: ID!
         url: String!
         mimetype: String!
-        type: String!
-        subtype: String!
-        imageSize: String
-        fileSize: String!
         tags: [Tag]
     }
     
